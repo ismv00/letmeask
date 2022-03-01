@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   Routes,
   Route,
@@ -6,12 +7,24 @@ import {
 import { Home } from './pages/Home';
 import { NewRoom } from "./pages/NewRoom";
 
+export const TestContext = React.createContext('');
+
 function App() {
   return (
     <Routes>
-        <Route path="/"  element={<Home />} />
-        <Route path="/rooms/new" element={<NewRoom />} />
+      <Route path='/' element={
+      <TestContext.Provider value={'Teste'}>
+        {<Home />}
+        </TestContext.Provider> }
+      />
 
+      <Route path='/rooms/new' element={
+      <TestContext.Provider value={'Teste'}>
+        {<NewRoom />}
+        </TestContext.Provider> }
+      />
+       
+      
     </Routes>
   );
 }
