@@ -1,30 +1,29 @@
-import { useContext } from 'react';
+
 
 import { useNavigate } from 'react-router-dom'
-import { auth, firebase } from '../services/firebase';
 
 import illustrationImg from '../assets/images/illustration.svg';
 import logoImg from '../assets/images/logo.svg';
 import googleIconImg from '../assets/images/google-icon.svg';
 import { Button } from '../components/Button';
 
-import {TestContext} from '../App';
 
 import '../styles/auth.scss';
+
+import { UseAuth } from '../hooks/useAuth';
 
 export function Home() {
 
     const navigate = useNavigate();
-    const value = useContext(TestContext);
+    const { user, signInWithGoogle} = UseAuth();
 
-    function HandleCreateRoom() {
-        const provider = new firebase.auth.GoogleAuthProvider();
+    async function HandleCreateRoom() {
 
-        auth.signInWithPopup(provider).then(result => {
-          console.log(result);
+        if(!user) {
+            await signInWithGoogle()
+        }
 
-          navigate('/rooms/new');
-        })
+        navigate('/rooms/new');
 
     }
     return (
