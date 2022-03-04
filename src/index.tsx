@@ -1,15 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { BrowserRouter } from 'react-router-dom'
+import React from "react";
 
-import './services/firebase';
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 
-import './styles/global.scss';
+import App from "./App";
+
+import "./services/firebase";
+
+import "./styles/global.scss";
 
 ReactDOM.render(
   <BrowserRouter>
     <App />
   </BrowserRouter>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

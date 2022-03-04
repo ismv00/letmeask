@@ -1,20 +1,15 @@
-import React, {
-  useState,
-  useEffect,
-  ReactNode,
-  useContext,
-  createContext,
-} from "react";
+import { useState, ReactNode, createContext, useMemo } from "react";
+
 import { firebase, auth } from "../services/firebase";
 
-type User = {
+type IUser = {
   id: string;
   name: string;
   avatar: string;
 };
 
 type AuthContextType = {
-  user: User | undefined;
+  user: IUser | undefined;
   signInWithGoogle: () => Promise<void>;
 };
 type AuthContextProviderProps = {
@@ -25,28 +20,23 @@ type AuthContextProviderProps = {
 export const AuthContext = createContext({} as AuthContextType);
 
 export function AuthContextProvider(props: AuthContextProviderProps) {
-  const [user, setUser] = useState<User>();
+  const { children } = props;
+  const [user, setUser] = useState<IUser>();
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      if (user) {
-        const { displayName, photoURL, uid } = user;
+  // const unsubscribe = auth.onAuthStateChanged((loggedUser) => {
+  //   if (loggedUser) {
+  //     const { displayName, photoURL, uid } = loggedUser;
 
-        if (!displayName || !photoURL) {
-          throw new Error("Missing information from google acount");
-        }
-        setUser({
-          id: uid,
-          name: displayName,
-          avatar: photoURL,
-        });
-      }
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  //     if (!displayName || !photoURL) {
+  //       throw new Error("Missing information from google acount");
+  //     }
+  //     setUser({
+  //       id: uid,
+  //       name: displayName,
+  //       avatar: photoURL,
+  //     });
+  //   }
+  // });
 
   async function signInWithGoogle() {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -57,7 +47,7 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
       const { displayName, photoURL, uid } = result.user;
 
       if (!displayName || !photoURL) {
-        throw new Error("Missing information from google acount");
+        throw new Error("Missing information from google account");
       }
       setUser({
         id: uid,
@@ -67,9 +57,11 @@ export function AuthContextProvider(props: AuthContextProviderProps) {
     }
   }
 
+  const providerProps = useMemo(() => ({ user, signInWithGoogle }), [user]);
+
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle }}>
-      {props.children}
+    <AuthContext.Provider value={providerProps}>
+      {children}
     </AuthContext.Provider>
   );
 }
