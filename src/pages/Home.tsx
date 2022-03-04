@@ -34,7 +34,7 @@ export function Home() {
           <img src={logoImg} alt="Letmeask" />
           <button
             type="button"
-            classonClick={HandleCreateRoom}
+            onClick={HandleCreateRoom}
             className="create-room"
           >
             <img src={googleIconImg} alt="iconGoogle" />
