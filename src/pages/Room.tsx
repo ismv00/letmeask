@@ -35,10 +35,10 @@ export function Room() {
       content: newQuestion,
       author: {
         name: user.name,
-        avatar: user.avatar,
+        avatar: user.avatar
       },
       isHighLighted: false,
-      isAnswered: false,
+      isAnswered: false
     };
 
     await database.ref(`rooms/${roomId}/questions`).push(question);

@@ -12,10 +12,10 @@ jest.mock("firebase/compat/app", () => {
     auth: jest.fn().mockResolvedValue({
       GoogleAuthProvider: jest.fn(),
       signInWithPopup: jest.fn().mockResolvedValue({
-        user: { id: "123", name: "jhon doe", avatar: "" },
-      }),
+        user: { id: "123", name: "jhon doe", avatar: "" }
+      })
     }),
-    database: jest.fn(),
+    database: jest.fn()
   };
 });
 
