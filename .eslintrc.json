@@ -5,6 +5,7 @@
   },
   "extends": [
     "airbnb",
+    "airbnb/hooks",
     "plugin:react/recommended",
     "airbnb-typescript",
     "plugin:jest/recommended",

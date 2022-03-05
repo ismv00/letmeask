@@ -7,11 +7,13 @@ import logoImg from "../assets/images/logo.svg";
 import { Button } from "../components/Button";
 import { UseAuth } from "../hooks/useAuth";
 import { database } from "../services/firebase";
+
 import "../styles/auth.scss";
 
 export function NewRoom() {
   const { user } = UseAuth();
   const [newRoom, setNewRoom] = useState("");
+
   const navigate = useNavigate();
 
   async function handleCreateRoom(event: FormEvent) {
@@ -25,11 +27,13 @@ export function NewRoom() {
 
     const firebaseRoom = await roomRef.push({
       title: newRoom,
-      authorId: user?.id,
+      authorId: user?.id
     });
 
     navigate(`/rooms/${firebaseRoom.key}`);
   }
+
+  // const { user } = UseAuth();
 
   return (
     <div id="page-auth">
@@ -58,6 +62,7 @@ export function NewRoom() {
 
             <Button type="submit">Criar sala</Button>
           </form>
+
           <p>
             Quer entrar em uma sala existente? <Link to="/">Clique aqui</Link>
           </p>
