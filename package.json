@@ -17,8 +17,7 @@
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
-    "@types/react": "^17.0.38",
-    "@types/react-dom": "^17.0.11",
+    "eslint-plugin-jest": "^26.1.1",
     "firebase": "^9.6.7",
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
@@ -117,5 +116,18 @@
       "eslint src --max-warnings=0",
       "prettier --write"
     ]
-  }
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ismv00/letmeask.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ismv00/letmeask/issues"
+  },
+  "homepage": "https://github.com/ismv00/letmeask#readme"
 }
