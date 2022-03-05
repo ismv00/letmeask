@@ -2,33 +2,88 @@
   "name": "letmeask",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "prepare": "husky install",
+    "lint": "eslint --config .eslintrc.json src",
+    "pre-commit": "lint-staged && yarn test --coverage --watchAll=false"
+  },
   "dependencies": {
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.0.0",
     "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.0.1",
     "@types/node": "^16.7.13",
-    "@types/react": "^17.0.20",
-    "@types/react-dom": "^17.0.9",
+    "@types/react": "^17.0.38",
+    "@types/react-dom": "^17.0.11",
     "firebase": "^9.6.7",
     "node-sass": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
-    "typescript": "^4.4.2",
-    "web-vitals": "^2.1.0"
+    "tslint": "^6.1.3",
+    "typescript": "^4.5.4",
+    "web-vitals": "^2.1.2"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.13.0",
+    "@typescript-eslint/parser": "^5.13.0",
+    "eslint": "^8.10.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^14.0.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.3",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-sort-destructure-keys": "^1.4.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.3.4",
+    "prettier": "^2.5.1",
+    "prettier-eslint": "^13.0.0",
+    "prettier-eslint-cli": "^5.0.1",
+    "tslint-config-prettier": "^1.18.0"
+  },
+  "resolutions": {
+    "lodash": "4.17.21",
+    "postcss": ">=7.0.36 <8.0.0 || >=8.2.10",
+    "prismjs": ">=1.24.0",
+    "path-parse": ">=1.0.7",
+    "tar": ">=3.2.2 <4.0.0 || >=4.4.14  <5.0.0 || >=5.0.6 <6.0.0 || >=6.1.1",
+    "url-parse": ">=1.5.2",
+    "xmldom": "github:xmldom/xmldom#0.7.0",
+    "browserslist": ">=4.16.5",
+    "css-what": ">=5.0.1",
+    "dns-packet": ">=5.2.2",
+    "glob-parent": ">=5.1.2",
+    "hosted-git-info": ">=2.8.9 <3.0.0",
+    "normalize-url": ">=4.5.1 <5.0.0 || >=5.3.1 <6.0.0 || <=6.0.1",
+    "ssri": ">=6.0.2 <7.0.0",
+    "trim": ">=0.0.3",
+    "ws": ">=7.4.6",
+    "immer": ">=9.0.6",
+    "axios": ">=0.21.2",
+    "ansi-regex": "^5.0.1",
+    "set-value": "^4.0.1",
+    "nth-check": "^2.0.1"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
       "react-app/jest"
+    ],
+    "overrides": [
+      {
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   },
   "browserslist": {
@@ -43,7 +98,24 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-    "@types/react-router-dom": "^5.3.3"
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{ts,tsx}",
+      "!**/node_modules/**",
+      "!**/src/json/**"
+    ],
+    "coveragePathIgnorePatterns": [
+      "reportWebVitals.ts",
+      "index.tsx",
+      "node_modules",
+      ".mock.ts"
+    ]
+  },
+  "lint-staged": {
+    "src/*.{js,ts,tsx}": [
+      "eslint --cache --fix",
+      "eslint src --max-warnings=0",
+      "prettier --write"
+    ]
   }
 }
