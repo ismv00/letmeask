@@ -1,5 +1,6 @@
 import { FormEvent, useEffect, useState } from "react";
 
+import { Question } from "components/Question";
 import { useParams } from "react-router-dom";
 
 import logoImg from "../assets/images/logo.svg";
@@ -23,8 +24,15 @@ type FirebaseQuestions = Record<
   }
 >;
 
-type Question = {
+type QuestionType = {
   id: string;
+  author: {
+    name: string;
+    avatar: string;
+  };
+  content: string;
+  isAnswered: boolean;
+  isHighlighted: boolean;
 };
 
 type RoomParams = {
@@ -35,7 +43,7 @@ export function Room() {
   const { user } = UseAuth();
   const params = useParams<RoomParams>();
   const [newQuestion, setNewQuestion] = useState("");
-  const [questions, setQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [title, setTitle] = useState("");
 
   const roomId = params.id;
@@ -53,7 +61,7 @@ export function Room() {
             id: key,
             content: value.content,
             author: value.author,
-            isHihgLighted: value.isHighLighted,
+            isHighlighted: value.isHighLighted,
             isAnswered: value.isAnswered
           };
         }
@@ -130,7 +138,17 @@ export function Room() {
           </div>
         </form>
 
-        {JSON.stringify(questions)}
+        <div className="question-list">
+          {questions.map((question) => {
+            return (
+              <Question
+                key={question.id}
+                content={question.content}
+                author={question.author}
+              />
+            );
+          })}
+        </div>
       </main>
     </div>
   );
