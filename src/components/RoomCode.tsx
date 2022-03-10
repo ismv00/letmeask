@@ -1,10 +1,9 @@
+import { RoomCodeProps } from "interfaces/RoomCodeTypes";
+
 import copyimg from "../assets/images/copy.svg";
 
 import "../styles/roomCode.scss";
 
-type RoomCodeProps = {
-  code: string;
-};
 export function RoomCode(props: RoomCodeProps) {
   const { code } = props;
   function copyRoomCodeToClipboard() {
