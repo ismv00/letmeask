@@ -1,12 +1,6 @@
 import "../styles/questions.scss";
 
-type QuestionProps = {
-  content: string;
-  author: {
-    name: string;
-    avatar: string;
-  };
-};
+import { QuestionProps } from "interfaces/QuestionTypes";
 
 export function Question({ author, content }: QuestionProps) {
   return (

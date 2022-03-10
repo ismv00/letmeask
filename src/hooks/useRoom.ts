@@ -1,36 +1,13 @@
 import { useEffect, useState } from "react";
 
+import { FirebaseQuestions, QuestionType } from "interfaces/RoomTypes";
 import { database } from "services/firebase";
-
-type FirebaseQuestions = Record<
-  string,
-  {
-    author: {
-      name: string;
-      avatar: string;
-    };
-    content: string;
-    isAnswered: boolean;
-    isHighLighted: boolean;
-  }
->;
-
-type QuestionType = {
-  id: string;
-  author: {
-    name: string;
-    avatar: string;
-  };
-  content: string;
-  isAnswered: boolean;
-  isHighlighted: boolean;
-};
 
 export function useRoom(roomId: string) {
   const [questions, setQuestions] = useState<QuestionType[]>([]);
   const [title, setTitle] = useState("");
 
-  useEffect(() => {
+  function renderQuestions() {
     const roomRef = database.ref(`rooms/${roomId}`);
 
     roomRef.on("value", (room) => {
@@ -52,6 +29,11 @@ export function useRoom(roomId: string) {
       setTitle(databaseRoom.title);
       setQuestions(parsedQuestions);
     });
+  }
+
+  useEffect(() => {
+    renderQuestions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [roomId]);
 
   return { questions, title };

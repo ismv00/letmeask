@@ -8,13 +8,10 @@ import logoImg from "../assets/images/logo.svg";
 import { Button } from "../components/Button";
 import { RoomCode } from "../components/RoomCode";
 import { UseAuth } from "../hooks/useAuth";
+import { RoomParams } from "../interfaces/RoomTypes";
 import { database } from "../services/firebase";
 
 import "../styles/room.scss";
-
-type RoomParams = {
-  id: string | any;
-};
 
 export function Room() {
   const { user } = UseAuth();
