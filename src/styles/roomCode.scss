@@ -15,7 +15,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-    }
+
+        > img {
+            margin-bottom: 13px;
+        }
+    } 
 
     span {
         display: block;
