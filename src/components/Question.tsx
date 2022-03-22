@@ -1,8 +1,7 @@
+import { QuestionProps } from "interfaces/QuestionTypes";
 import "../styles/questions.scss";
 
-import { QuestionProps } from "interfaces/QuestionTypes";
-
-export function Question({ author, content }: QuestionProps) {
+export function Question({ author, children, content }: QuestionProps) {
   return (
     <div className="question">
       <p>{content}</p>
@@ -11,7 +10,7 @@ export function Question({ author, content }: QuestionProps) {
           <img src={author.avatar} alt={author.name} />
           <span>{author.name}</span>
         </div>
-        <div />
+        <div>{children}</div>
       </footer>
     </div>
   );
