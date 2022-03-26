@@ -1,4 +1,5 @@
-import { Routes, Route } from "react-router-dom";
+import { AdminRoom } from "pages/AdminRoom";
+import { Route, Routes } from "react-router-dom";
 
 import { AuthContextProvider } from "./contexts/AuthContext";
 import { Home } from "./pages/Home";
@@ -31,6 +32,15 @@ function App() {
         element={
           <AuthContextProvider>
             <Room />
+          </AuthContextProvider>
+        }
+      />
+
+      <Route
+        path="/admin/rooms/:id"
+        element={
+          <AuthContextProvider>
+            <AdminRoom />
           </AuthContextProvider>
         }
       />
